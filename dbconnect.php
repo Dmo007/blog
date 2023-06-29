@@ -11,7 +11,7 @@
     $conn=new PDO($dsn,$dbuser,$dbpassword);
     $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-    echo "Connection success";
+  //  echo "Connection success";
 
  }catch(PDOException $e){
     die("Connection fail:".$e->getMessage());
