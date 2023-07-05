@@ -1,47 +1,54 @@
 <?php 
+ 
  include "layouts/nav_sidebar.php";
  include "../dbconnect.php";
- $sql="SELECT posts.*,categories.name as c_name,users.name as u_name FROM posts INNER JOIN categories ON posts.category=categories.id INNER JOIN users ON posts.user_id=users.id";
+ 
+ $sql="SELECT * FROM users";
  $stmt=$conn->prepare($sql);
  $stmt->execute();
- $posts=$stmt->fetchAll();
+ $users=$stmt->fetchAll();
+
+//  var_dump($users);
+
 ?>
-                <main>
+                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Posts</h1>
+                        <h1 class="mt-4">User table</h1>
                         <div>
-                            <a href="post_create.php" class="btn btn-primary float-end">Create Post</a>
+                            <a href="user_create.php" class="btn btn-primary float-end">Create User</a>
                         </div>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Posts</li>
+                            <li class="breadcrumb-item active">User</li>
                         </ol>
                        
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Post Table
+                                User Table
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <!-- <th>#</th> -->
-                                            <th>Title</th>
-                                            <th>Category</th>
-                                            <th>Created By</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Password</th>
+                                            <th>Profile</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                         foreach($posts as $post){
+                                         foreach($users as $user){
                                         ?>
                                         <tr>
-                                            <td><?= $post['title']?></td>
-                                            <td><?= $post['c_name']?></td>
-                                            <td><?= $post['u_name']?></td>
-                                            <td><button class="btn btn-warning mx-3 w-25">Edit</button><button class="btn btn-danger w-25">Delete</button></td>
+                                            <!-- <td></td> -->
+                                            <td><?= $user['name']?></td>
+                                            <td><?= $user['email']?></td>
+                                            <td><?= $user['password']?></td>
+                                            <td><?= $user['profile']?></td>
+                                            <td><button class="btn btn-warning mx-3 w-25">Edit</button><button class="btn btn-danger w-25">Dele</button></td>
                                         </tr>
                                     <?php 
                                          }
@@ -52,6 +59,7 @@
                         </div>
                     </div>
                 </main>
+
 <?php 
  include "layouts/footer.php";
 

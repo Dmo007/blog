@@ -1,47 +1,46 @@
 <?php 
- include "layouts/nav_sidebar.php";
- include "../dbconnect.php";
- $sql="SELECT posts.*,categories.name as c_name,users.name as u_name FROM posts INNER JOIN categories ON posts.category=categories.id INNER JOIN users ON posts.user_id=users.id";
- $stmt=$conn->prepare($sql);
- $stmt->execute();
- $posts=$stmt->fetchAll();
+  
+  include "layouts/nav_sidebar.php";
+  include "../dbconnect.php";
+
+  $sql="SELECT * FROM categories";
+  $stmt=$conn->prepare($sql);
+  $stmt->execute();
+  $categories=$stmt->fetchAll();
+//   var_dump($categories);
+
 ?>
-                <main>
+ <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Posts</h1>
+                        <h1 class="mt-4">Category table</h1>
                         <div>
-                            <a href="post_create.php" class="btn btn-primary float-end">Create Post</a>
+                            <a href="category_create.php" class="btn btn-primary float-end">Create Categories</a>
                         </div>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Posts</li>
+                            <li class="breadcrumb-item active">Category</li>
                         </ol>
                        
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Post Table
+                                Category Table
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <!-- <th>#</th> -->
-                                            <th>Title</th>
                                             <th>Category</th>
-                                            <th>Created By</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                         foreach($posts as $post){
+                                         foreach($categories as $category){
                                         ?>
                                         <tr>
-                                            <td><?= $post['title']?></td>
-                                            <td><?= $post['c_name']?></td>
-                                            <td><?= $post['u_name']?></td>
-                                            <td><button class="btn btn-warning mx-3 w-25">Edit</button><button class="btn btn-danger w-25">Delete</button></td>
+                                            <td><?= $category['name']?></td>
+                                            <td><button class="btn btn-warning mx-3 w-25">Edit</button><button class="btn btn-danger w-25">Dele</button></td>
                                         </tr>
                                     <?php 
                                          }
@@ -52,7 +51,9 @@
                         </div>
                     </div>
                 </main>
+
 <?php 
+ 
  include "layouts/footer.php";
 
 ?>

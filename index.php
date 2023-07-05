@@ -6,10 +6,11 @@
  $stmt=$conn->prepare($sql);
  $stmt->execute();
  $posts=$stmt->fetchAll();
- var_dump($posts);
-
+//  var_dump($posts);
 
  ?>
+ 
+
         <!-- Page header with logo and tagline-->
         <header class="py-5 bg-light border-bottom mb-4">
             <div class="container">
