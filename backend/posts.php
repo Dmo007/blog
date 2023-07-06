@@ -41,7 +41,7 @@
                                             <td><?= $post['title']?></td>
                                             <td><?= $post['c_name']?></td>
                                             <td><?= $post['u_name']?></td>
-                                            <td><button class="btn btn-warning mx-3 w-25">Edit</button><button class="btn btn-danger w-25">Delete</button></td>
+                                            <td><a href="edit_post.php?id=<?=$post['id']?>" class="btn btn-warning mx-3 w-25">Edit</a><a class="btn btn-danger w-25">Delete</a ></td>
                                         </tr>
                                     <?php 
                                          }

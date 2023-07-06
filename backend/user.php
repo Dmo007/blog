@@ -48,7 +48,7 @@
                                             <td><?= $user['email']?></td>
                                             <td><?= $user['password']?></td>
                                             <td><?= $user['profile']?></td>
-                                            <td><button class="btn btn-warning mx-3 w-25">Edit</button><button class="btn btn-danger w-25">Dele</button></td>
+                                            <td><a href="edit_user.php?id=<?=$user['id']?>" class="btn btn-warning mx-3">Edit</a><a class="btn btn-danger">Dele</a></td>
                                         </tr>
                                     <?php 
                                          }
