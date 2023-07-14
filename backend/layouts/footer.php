@@ -19,7 +19,10 @@
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+
+
         <script>
+          //summernote
       $('#description').summernote({
         placeholder: 'Hello stand alone ui',
         tabsize: 2,
@@ -34,6 +37,18 @@
           ['view', ['fullscreen', 'codeview', 'help']]
         ]
       });
+
+      //delete
+      $(document).ready(function(){
+        $('tbody').on('click','.delete',function(){
+          let id=$(this).data('id');
+          // console.log(id);
+          $('#del_id').val(id);
+          $('#del_modal').modal('show');
+        });
+        
+      });
+      
     </script>
     </body>
 </html>

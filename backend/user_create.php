@@ -1,4 +1,8 @@
 <?php 
+session_start();
+
+if(isset($_SESSION['user_id'])){
+
   include "../dbconnect.php";
 
   if($_SERVER['REQUEST_METHOD']=='POST'){
@@ -47,7 +51,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Profile</label>
-                    <textarea class="form-control" id="profile" rows="3" name="profile"></textarea>
+                    <textarea class="form-control" id="description" rows="3" name="profile"></textarea>
                 </div>
                  <button class="btn btn-primary w-100 mt-3 " type="submit">Submit</button>
             </form>
@@ -59,5 +63,7 @@
 
 <?php 
 include "layouts/footer.php";
+}else{
+    header("location:login.php");}
 
 ?>

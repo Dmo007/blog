@@ -1,5 +1,9 @@
 <?php
+
+ session_start();
+ if (isset($_SESSION['user_id'])){
  include "layouts/nav_sidebar.php";
+ 
 ?>
          
                 <main>
@@ -557,5 +561,9 @@
                     </div>
                 </main>
  <?php
+ 
  include "layouts/footer.php";
+ }else{
+    header("location:login.php");
+ }
  ?>

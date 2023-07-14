@@ -1,7 +1,22 @@
 <?php 
   
-  include "layouts/nav_sidebar.php";
+  session_start();
+  if(isset($_SESSION['user_id'])){
   include "../dbconnect.php";
+
+  if($_SERVER['REQUEST_METHOD']=='POST'){
+
+    $id=$_POST['id'];
+    $sql="DELETE FROM categories WHERE id=:id";
+    $stmt=$conn->prepare($sql);
+    $stmt->bindParam(':id',$id);
+    $stmt->execute();
+
+    header('location:category.php');
+  }else{
+
+    include "layouts/nav_sidebar.php";
+
 
   $sql="SELECT * FROM categories";
   $stmt=$conn->prepare($sql);
@@ -40,7 +55,8 @@
                                         ?>
                                         <tr>
                                             <td><?= $category['name']?></td>
-                                            <td><a href="edit_category.php?id=<?=$category['id']?>" class="btn btn-warning mx-3 w-25">Edit</a><a class="btn btn-danger w-25">Dele</a></td>
+                                            <td><a href="edit_category.php?id=<?=$category['id']?>" class="btn btn-warning mx-3 w-25">Edit</a>
+                                            <a class="btn btn-danger w-25 delete" data-id="<?=$category['id']?>">Dele</a></td>
                                         </tr>
                                     <?php 
                                          }
@@ -51,9 +67,31 @@
                         </div>
                     </div>
                 </main>
-
+                <div class="modal fade" id="del_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                 <div class="modal-dialog">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="text-danger">Delete?.....</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                         </div>
+                 <div class="modal-body">
+                    <h6>Are you sure to Delete?</h6>
+                </div>
+             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form action="" method="post">
+                     <button type="submit" class="btn btn-danger">Delete</button>
+                     <input type="hidden" name="id" id="del_id">
+                </form>
+            </div>
+        </div>
+     </div>
+</div>
 <?php 
  
  include "layouts/footer.php";
-
+          }
+        }else{
+            header("location:login.php");
+        }
 ?>

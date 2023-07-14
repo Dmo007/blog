@@ -1,4 +1,8 @@
 <?php 
+
+    session_start();
+    if(isset($_SESSION['user_id'])){
+
  include "../dbconnect.php";
 
  if($_SERVER['REQUEST_METHOD']=='POST'){
@@ -8,7 +12,7 @@
     $stmt=$conn->prepare($sql);
     $stmt->bindParam(':name',$cate_name);
     $stmt->execute();
-    header("location:category_create.php");
+    header("location:category.php");
     exit();
  }else{
     include "layouts/nav_sidebar.php";
@@ -39,5 +43,8 @@
 <?php 
 
 include "layouts/footer.php";
+    }else{
+        header("location:login.php");
+    }
 
 ?>

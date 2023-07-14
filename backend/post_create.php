@@ -1,4 +1,7 @@
 <?php 
+
+session_start();
+ if (isset($_SESSION['user_id'])){
   include "../dbconnect.php";
 
 $sql="SELECT * FROM categories";
@@ -10,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
 
 $title=$_POST['title'];
 $category_id=$_POST['category_id'];
-$user_id=2;
+$user_id=$_SESSION['user_id'];
 $description=$_POST['description'];
 $photo_arr=$_FILES['photo'];
 
@@ -89,4 +92,7 @@ exit;
 
 <?php
     include "layouts/footer.php";
+}else{
+    header("location:login.php");
+ }
 ?>
